@@ -1,0 +1,100 @@
+# ============================================================
+#  .gitignore — C++/CLI Microsoft · Visual Studio 2026
+# ============================================================
+
+# ----- Visual Studio ----------------------------------------
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.vcxproj.filters
+*.vcxproj.user
+*.VC.db
+*.VC.opendb
+*.sdf
+*.opensdf
+*.ipch
+ipch/
+
+# ----- Binarios y compilados --------------------------------
+*.exe
+*.dll
+*.pdb
+*.ilk
+*.exp
+*.lib
+*.obj
+*.o
+*.iobj
+*.ipdb
+*.meta
+
+# ----- Directorios de salida de Visual Studio ---------------
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# ----- Archivos de publish / deployment ---------------------
+[Pp]ublish/
+PublishScripts/
+
+# ----- .NET / CLR (para C++/CLI) ----------------------------
+*.nupkg
+*.snupkg
+*.egg
+*.manifest
+*.cache
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# ----- NuGet ------------------------------------------------
+*.nuget.props
+*.nuget.targets
+packages/
+!packages/build/
+
+# ----- Archivos generados por MSBuild -----------------------
+*.pidb
+*.orig
+*.vsp
+*.vspx
+*.sap
+
+# ----- Archivos temporales del sistema Windows --------------
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+*.tmp
+*.temp
+*.log
+
+# ----- Archivos de cobertura y pruebas ----------------------
+*.coverage
+*.coveragexml
+TestResult.xml
+[Tt]est[Rr]esult*/
+_TestResults/
+
+# ----- ReSharper --------------------------------------------
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# ----- Archivos de diagnóstico de VS ------------------------
+*.DiagnosticsHub.diagsession
+*.vsd
+*.vsdx
+*.vsdm
