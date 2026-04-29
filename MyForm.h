@@ -8,6 +8,7 @@ namespace aReyesProyectoPOO20261 {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Collections::Generic; // Agregar esta línea para usar Dictionary
 
 	/// <summary>
 	/// Resumen de MyForm
@@ -127,8 +128,41 @@ namespace aReyesProyectoPOO20261 {
 		}
 #pragma endregion
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) { // Evento del botón de login al presionarlo
-		String^ User = this->textBoxUser->Text; // Obtener el texto ingresado en el TextBox
-		Console::WriteLine("Usuario ingresado: "+ User); // Imprimir el usuario en la consola (puedes reemplazar esto con la lógica de autenticación)
+		String^ user = this->textBoxUser->Text; // Obtener el texto ingresado en el TextBox de usuario
+		String^ password = this->textBoxPassword->Text;// Obtener el texto ingresado en el TextBox de contraseña
+
+		Dictionary<String^,String^>^ usersDic = gcnew Dictionary<String^, String^>(); // Crear un diccionario para almacenar usuarios y contraseñas
+		//identificador sera usuario para buscar la contraseña y el valor sera la contraseña para comparar con la ingresada
+
+		usersDic->Add("Alonso","abcd1234");
+		usersDic->Add("Pepe", "abcd5678");
+
+
+		bool isRegistered = false; // Variable para verificar si el usuario está registrado
+		for each (String^ n in usersDic->Keys) {
+			if (n == user) {
+				isRegistered = true;
+				Console::WriteLine("Usuario registrado: " + n);
+				break; // Salir del bucle si se encuentra el usuario
+			}
+			 
+		}
+			
+		if (isRegistered) {
+			if (password == usersDic[user]) {
+				Console::WriteLine("Contraseña correcta, bienvenido " + user);
+
+			}
+			else {
+				Console::WriteLine("Contraseña incorrecta, intente nuevamente");
+
+			}
+		}
+		else {
+			Console::WriteLine("Usuario no registrado, intente nuevamente");
+		}
+		
+		//Console::WriteLine("Usuario ingresado: "+ user); // Imprimir el usuario en la consola (puedes reemplazar esto con la lógica de autenticación)
 
 	}
 	private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
