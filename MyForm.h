@@ -10,12 +10,13 @@ namespace aReyesProyectoPOO20261 {
 	using namespace System::Data;
 	using namespace System::Drawing;
 	using namespace System::Collections::Generic; // Agregar esta línea para usar Dictionary
+	using namespace Model; // Agregar esta línea para usar la clase Usuario y Utils
 
 
-
+	//Estas lineas ya no las agregamos aquí, sino que las movimos a utils.h y utils.cpp para mantener el código más organizado y modularizado. Ahora podemos usar la función GetMD5Hash desde la clase Utils en nuestro formulario sin tener que definirla directamente aquí.
 	// Agregar estas líneas para usar MD5 y obtener el hash de los inputs
 	//============================================================================================================
-	using namespace System;
+	/*using namespace System;
 	using namespace System::Security::Cryptography;
 	using namespace System::Text;
 
@@ -35,16 +36,16 @@ namespace aReyesProyectoPOO20261 {
 
 		// 5. Formatear cada byte como string hexadecimal
 		for (int i = 0; i < hashBytes->Length; i++) {
-			/* "x2" es un formato de cadena:
-			   - 'x' significa hexadecimal en minúsculas.
-			   - '2' asegura que siempre tenga dos dígitos (ej. 0xf se convierte en "0f").
-			*/
+			// "x2" es un formato de cadena:
+			  // - 'x' significa hexadecimal en minúsculas.
+			  // - '2' asegura que siempre tenga dos dígitos (ej. 0xf se convierte en "0f").
+			
 			sBuilder->Append(hashBytes[i].ToString("x2"));
 		}
 
 		// 6. Retornar el string hexadecimal completo
 		return sBuilder->ToString();
-	}
+	}*/
 
 	//============================================================================================================
 
@@ -171,78 +172,23 @@ namespace aReyesProyectoPOO20261 {
 #pragma endregion
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) { // Evento del botón de login al presionarlo
 
-		//Lógica de autenticación de usuario - básica
-		//==================================================================================================================
+		// Evitar shadowing de nombres: usar nombres distintos para el String^ y para el objeto Usuario
+		String^ username = this->textBoxUser->Text; // Obtener el texto ingresado en el TextBox de usuario
+		String^ password = this->textBoxPassword->Text; // Obtener el texto ingresado en el TextBox de contraseña
 
-
-		/*
-		String^ user = this->textBoxUser->Text; // Obtener el texto ingresado en el TextBox de usuario
-		String^ password = this->textBoxPassword->Text;// Obtener el texto ingresado en el TextBox de contraseña
-
-		Dictionary<String^,String^>^ usersDicc = gcnew Dictionary<String^, String^>(); // Crear un diccionario para almacenar usuarios y contraseñas
-		//identificador sera usuario para buscar la contraseña y el valor sera la contraseña para comparar con la ingresada
-
-		usersDicc->Add("Alonso","abcd1234");
-		usersDicc->Add("Pepe", "abcd5678");
-
-
-		bool isRegistered = false; // Variable para verificar si el usuario está registrado
-		for each (String^ n in usersDicc->Keys) {
-			if (n == user) {
-				isRegistered = true;
-				Console::WriteLine("Usuario registrado: " + n);
-				break; // Salir del bucle si se encuentra el usuario
-			}
-			 
-		}
-			
-		if (isRegistered) {
-			if (password == usersDicc[user]) {
-				Console::WriteLine("Contraseña correcta, bienvenido " + user);
-
-			}
-			else {
-				Console::WriteLine("Contraseña incorrecta, intente nuevamente");
-
-			}
-		}
-		else {
-			Console::WriteLine("Usuario no registrado, intente nuevamente");
-		}
+		// Creamos un objeto Usuario para autentificarlo usando el método autentificar que compara el token de verificación con el hash MD5 del usuario concatenado con la contraseña ingresada
+		Usuario^ usuario = gcnew Usuario(username, password);
+		// Seteamos el token de verificación: "e447e9b4e2246ad58b5e1a91d69f3222" que es el hash MD5 de "Alonso" + "udj24c"
 		
-		//Console::WriteLine("Usuario ingresado: "+ user); // Imprimir el usuario en la consola (puedes reemplazar esto con la lógica de autenticación)
+		usuario->setVerificationToken("e447e9b4e2246ad58b5e1a91d69f3222");
 
-		//==================================================================================================================
-		*/
-
-
-		//Lógica de autenticación de usuario - usando MD5 para comparar los hashes de usuarios + contraseñas
-		//================================================================================================================
-
-
-		/*
-		String^ Getmd5 = GetMD5Hash("Alonso" + "udj24c");
-		Console::WriteLine("Hash MD5 de Alonso + udj24c: " + Getmd5);
-		//Hash MD5 de "Alonso" + "udj24c" es: e447e9b4e2246ad58b5e1a91d69f3222
-		*/
-		String^ user = this->textBoxUser->Text; // Obtener el texto ingresado en el TextBox de usuario
-		String^ password = this->textBoxPassword->Text;// Obtener el texto ingresado en el TextBox de contraseña
-
-		String^ md5 = GetMD5Hash(user + password); // Obtener el hash MD5 del usuario concatenado con la contraseña
-
-
-
-		if (md5 == "e447e9b4e2246ad58b5e1a91d69f3222") { // Comparar el hash obtenido con el hash esperado para "Alonso" + "udj24c"
+		if (usuario->autentificar()) { // Comparar el hash obtenido con el hash esperado
 			this->Hide(); // Ocultar el formulario actual si autenticación es exitosa
-			Console::WriteLine("Autenticación exitosa, bienvenido " + user);
+			Console::WriteLine("Autenticación exitosa, bienvenido " + username);
 		}
 		else {
 			Console::WriteLine("Autenticación fallida, usuario o contraseña incorrectos");
 		}
-
-
-
-
 
 	}
 	private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
