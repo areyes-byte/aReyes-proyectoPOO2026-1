@@ -1,7 +1,7 @@
 #pragma once
 
 
-namespace aReyesProyectoPOO20261 {
+namespace View {
 
 	using namespace System;
 	using namespace System::ComponentModel;
@@ -9,12 +9,12 @@ namespace aReyesProyectoPOO20261 {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
-	using namespace System::Collections::Generic; // Agregar esta lÌnea para usar Dictionary
-	using namespace Model; // Agregar esta lÌnea para usar la clase Usuario y Utils
+	using namespace System::Collections::Generic; // Agregar esta l√≠nea para usar Dictionary
+	using namespace Model; // Agregar esta l√≠nea para usar la clase Usuario y Utils
 
 
-	//Estas lineas ya no las agregamos aquÌ, sino que las movimos a utils.h y utils.cpp para mantener el cÛdigo m·s organizado y modularizado. Ahora podemos usar la funciÛn GetMD5Hash desde la clase Utils en nuestro formulario sin tener que definirla directamente aquÌ.
-	// Agregar estas lÌneas para usar MD5 y obtener el hash de los inputs
+	//Estas lineas ya no las agregamos aqu√≠, sino que las movimos a utils.h y utils.cpp para mantener el c√≥digo m√°s organizado y modularizado. Ahora podemos usar la funci√≥n GetMD5Hash desde la clase Utils en nuestro formulario sin tener que definirla directamente aqu√≠.
+	// Agregar estas l√≠neas para usar MD5 y obtener el hash de los inputs
 	//============================================================================================================
 	/*using namespace System;
 	using namespace System::Security::Cryptography;
@@ -37,8 +37,8 @@ namespace aReyesProyectoPOO20261 {
 		// 5. Formatear cada byte como string hexadecimal
 		for (int i = 0; i < hashBytes->Length; i++) {
 			// "x2" es un formato de cadena:
-			  // - 'x' significa hexadecimal en min˙sculas.
-			  // - '2' asegura que siempre tenga dos dÌgitos (ej. 0xf se convierte en "0f").
+			  // - 'x' significa hexadecimal en min√∫sculas.
+			  // - '2' asegura que siempre tenga dos d√≠gitos (ej. 0xf se convierte en "0f").
 			
 			sBuilder->Append(hashBytes[i].ToString("x2"));
 		}
@@ -52,24 +52,24 @@ namespace aReyesProyectoPOO20261 {
 
 
 	/// <summary>
-	/// Resumen de MyForm
+	/// Resumen de Login
 	/// </summary>
-	public ref class MyForm : public System::Windows::Forms::Form
+	public ref class Login : public System::Windows::Forms::Form
 	{
 	public:
-		MyForm(void)
+		Login(void)
 		{
 			InitializeComponent();
 			//
-			//TODO: agregar cÛdigo de constructor aquÌ
+			//TODO: agregar c√≥digo de constructor aqu√≠
 			//
 		}
 
 	protected:
 		/// <summary>
-		/// Limpiar los recursos que se estÈn usando.
+		/// Limpiar los recursos que se est√©n usando.
 		/// </summary>
-		~MyForm()
+		~Login()
 		{
 			if (components)
 			{
@@ -87,14 +87,14 @@ namespace aReyesProyectoPOO20261 {
 
 	private:
 		/// <summary>
-		/// Variable del diseÒador necesaria.
+		/// Variable del dise√±ador necesaria.
 		/// </summary>
 		System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// MÈtodo necesario para admitir el DiseÒador. No se puede modificar
-		/// el contenido de este mÈtodo con el editor de cÛdigo.
+		/// M√©todo necesario para admitir el Dise√±ador. No se puede modificar
+		/// el contenido de este m√©todo con el editor de c√≥digo.
 		/// </summary>
 		void InitializeComponent(void)
 		{
@@ -113,7 +113,7 @@ namespace aReyesProyectoPOO20261 {
 			this->button1->TabIndex = 0;
 			this->button1->Text = L"Login";
 			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &MyForm::button1_Click);
+			this->button1->Click += gcnew System::EventHandler(this, &Login::button1_Click);
 			// 
 			// label1
 			// 
@@ -130,7 +130,7 @@ namespace aReyesProyectoPOO20261 {
 			this->textBoxUser->Name = L"textBoxUser";
 			this->textBoxUser->Size = System::Drawing::Size(100, 20);
 			this->textBoxUser->TabIndex = 2;
-			this->textBoxUser->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox1_TextChanged);
+			this->textBoxUser->TextChanged += gcnew System::EventHandler(this, &Login::textBox1_TextChanged);
 			// 
 			// label2
 			// 
@@ -140,7 +140,7 @@ namespace aReyesProyectoPOO20261 {
 			this->label2->Size = System::Drawing::Size(53, 13);
 			this->label2->TabIndex = 3;
 			this->label2->Text = L"Password";
-			this->label2->Click += gcnew System::EventHandler(this, &MyForm::label2_Click);
+			this->label2->Click += gcnew System::EventHandler(this, &Login::label2_Click);
 			// 
 			// textBoxPassword
 			// 
@@ -149,7 +149,7 @@ namespace aReyesProyectoPOO20261 {
 			this->textBoxPassword->Size = System::Drawing::Size(100, 20);
 			this->textBoxPassword->TabIndex = 4;
 			this->textBoxPassword->UseSystemPasswordChar = true;
-			this->textBoxPassword->TextChanged += gcnew System::EventHandler(this, &MyForm::textBoxPassword_TextChanged);
+			this->textBoxPassword->TextChanged += gcnew System::EventHandler(this, &Login::textBoxPassword_TextChanged);
 			// 
 			// MyForm
 			// 
@@ -162,32 +162,32 @@ namespace aReyesProyectoPOO20261 {
 			this->Controls->Add(this->textBoxUser);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->button1);
-			this->Name = L"MyForm";
-			this->Text = L"MyForm";
-			this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load);
+			this->Name = L"Login";
+			this->Text = L"Login";
+			this->Load += gcnew System::EventHandler(this, &Login::Login_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
-	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) { // Evento del botÛn de login al presionarlo
+	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) { // Evento del bot√≥n de login al presionarlo
 
 		// Evitar shadowing de nombres: usar nombres distintos para el String^ y para el objeto Usuario
 		String^ username = this->textBoxUser->Text; // Obtener el texto ingresado en el TextBox de usuario
-		String^ password = this->textBoxPassword->Text; // Obtener el texto ingresado en el TextBox de contraseÒa
+		String^ password = this->textBoxPassword->Text; // Obtener el texto ingresado en el TextBox de contrase√±a
 
-		// Creamos un objeto Usuario para autentificarlo usando el mÈtodo autentificar que compara el token de verificaciÛn con el hash MD5 del usuario concatenado con la contraseÒa ingresada
+		// Creamos un objeto Usuario para autentificarlo usando el m√©todo autentificar que compara el token de verificaci√≥n con el hash MD5 del usuario concatenado con la contrase√±a ingresada
 		Usuario^ usuario = gcnew Usuario(username, password);
-		// Seteamos el token de verificaciÛn: "e447e9b4e2246ad58b5e1a91d69f3222" que es el hash MD5 de "Alonso" + "udj24c"
+		// Seteamos el token de verificaci√≥n: "e447e9b4e2246ad58b5e1a91d69f3222" que es el hash MD5 de "Alonso" + "udj24c"
 		
 		usuario->setVerificationToken("e447e9b4e2246ad58b5e1a91d69f3222");
 
 		if (usuario->autentificar()) { // Comparar el hash obtenido con el hash esperado
-			this->Hide(); // Ocultar el formulario actual si autenticaciÛn es exitosa
-			Console::WriteLine("AutenticaciÛn exitosa, bienvenido " + username);
+			this->Hide(); // Ocultar el formulario actual si autenticaci√≥n es exitosa
+			Console::WriteLine("Autenticaci√≥n exitosa, bienvenido " + username);
 		}
 		else {
-			Console::WriteLine("AutenticaciÛn fallida, usuario o contraseÒa incorrectos");
+			Console::WriteLine("Autenticaci√≥n fallida, usuario o contrase√±a incorrectos");
 		}
 
 	}
@@ -197,7 +197,7 @@ namespace aReyesProyectoPOO20261 {
 	}
 private: System::Void textBoxPassword_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 }
-private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e) {
+private: System::Void Login_Load(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }
