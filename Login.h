@@ -1,4 +1,5 @@
 #pragma once
+#include "MainForm.h"
 
 
 namespace View {
@@ -185,6 +186,10 @@ namespace View {
 		if (usuario->autentificar()) { // Comparar el hash obtenido con el hash esperado
 			this->Hide(); // Ocultar el formulario actual si autenticación es exitosa
 			Console::WriteLine("Autenticación exitosa, bienvenido " + username);
+
+			MainForm^ mainFormInstance = gcnew MainForm(); // Crear una instancia del formulario principal
+			mainFormInstance->ShowDialog(); // Mostrar el formulario principal como un cuadro de diálogo modal
+			this->Close(); //Cuando se cierre el formulario principal, cerrar también el formulario de login
 		}
 		else {
 			Console::WriteLine("Autenticación fallida, usuario o contraseña incorrectos");
