@@ -141,6 +141,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Controller\Controller.vcxproj">
+      <Project>{3237cda5-66de-3080-9cc2-81fa778224ef}</Project>
+    </ProjectReference>
     <ProjectReference Include="Model\Model.vcxproj">
       <Project>{30c04796-38c1-5553-a373-7bef0a5cdeba}</Project>
     </ProjectReference>

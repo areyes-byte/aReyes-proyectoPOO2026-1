@@ -12,6 +12,7 @@ namespace View {
 	using namespace System::Drawing;
 	using namespace System::Collections::Generic; // Agregar esta línea para usar Dictionary
 	using namespace Model; // Agregar esta línea para usar la clase Usuario y Utils
+	using namespace Controller; // Agregar esta línea para usar la clase Operations y la lista de usuarios
 
 
 	//Estas lineas ya no las agregamos aquí, sino que las movimos a utils.h y utils.cpp para mantener el código más organizado y modularizado. Ahora podemos usar la función GetMD5Hash desde la clase Utils en nuestro formulario sin tener que definirla directamente aquí.
@@ -177,13 +178,29 @@ namespace View {
 		String^ username = this->textBoxUser->Text; // Obtener el texto ingresado en el TextBox de usuario
 		String^ password = this->textBoxPassword->Text; // Obtener el texto ingresado en el TextBox de contraseña
 
-		// Creamos un objeto Usuario para autentificarlo usando el método autentificar que compara el token de verificación con el hash MD5 del usuario concatenado con la contraseña ingresada
-		Usuario^ usuario = gcnew Usuario(username, password);
-		// Seteamos el token de verificación: "e447e9b4e2246ad58b5e1a91d69f3222" que es el hash MD5 de "Alonso" + "udj24c"
-		
-		usuario->setVerificationToken("e447e9b4e2246ad58b5e1a91d69f3222");
+		Usuario^ usuario = Controller::Operations::ReadUser(username); // Llamar al método ReadUser para buscar el usuario en la lista de usuarios. En este ejemplo, no estamos utilizando el resultado de esta función, pero en una aplicación real podríamos usarlo para obtener información adicional del usuario o para validar su existencia antes de intentar autenticarlo.
+		 
 
-		if (usuario->autentificar()) { // Comparar el hash obtenido con el hash esperado
+		
+		if (usuario == nullptr) {
+			Windows::Forms::DialogResult result = MessageBox::Show("El usuario no existe", "Desea Registrarse?", MessageBoxButtons::YesNo, MessageBoxIcon::Error);
+			if (result == Windows::Forms::DialogResult::Yes) {
+				// Aquí podrías agregar la lógica para mostrar un formulario de registro o para crear un nuevo usuario
+				Console::WriteLine("Redirigiendo al formulario de registro...");
+			}
+			
+			Console::WriteLine("El usuario no existe");
+		
+			return; // Salir del método si el usuario no existe para evitar intentar autenticar un usuario nulo
+		}
+		
+		// Creamos un objeto Usuario para autentificarlo usando el método autentificar que compara el token de verificación con el hash MD5 del usuario concatenado con la contraseña ingresada
+		//Usuario^ usuario = gcnew Usuario(username, "e447e9b4e2246ad58b5e1a91d69f3222");
+		//"e447e9b4e2246ad58b5e1a91d69f3222" que es el hash MD5 de "Alonso" + "udj24c"
+		
+		
+
+		if (usuario->autentificar(password)) { // Comparar el hash obtenido con el hash esperado
 			this->Hide(); // Ocultar el formulario actual si autenticación es exitosa
 			Console::WriteLine("Autenticación exitosa, bienvenido " + username);
 

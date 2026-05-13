@@ -3,6 +3,7 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
+  <Project Path="../Controller/Controller.vcxproj" />
   <Project Path="aReyesProyectoPOO20261.vcxproj" />
   <Project Path="Model/Model.vcxproj" />
 </Solution>

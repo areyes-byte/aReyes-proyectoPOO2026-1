@@ -12,8 +12,7 @@ namespace Model {
 		String^ password;
 		String^ verificationToken;
 		Usuario(); // Constructor por defecto que inicializa los atributos con valores vacíos
-		void setVerificationToken(String^ token);// Método para establecer el token de verificación basado en el nombre de usuario y la contraseña, utilizando el hash MD5
-		Usuario(String^ username, String^ password); // Constructor que permite inicializar el nombre de usuario y el token de verificación al crear un objeto Usuario
-		bool autentificar();
+		Usuario(String^ username, String^ token	); // Constructor que permite inicializar el nombre de usuario y el token de verificación al crear un objeto Usuario
+		bool autentificar(String^ password);
 	};
 }

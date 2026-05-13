@@ -12,17 +12,19 @@ Usuario::Usuario() { // Constructor por defecto que inicializa los atributos con
 	this->verificationToken = "";
 }
 
-void Usuario::setVerificationToken(String^ token) { // Método para establecer el token de verificación basado en el nombre de usuario y la contraseña, utilizando el hash MD5
+
+Usuario::Usuario(String^ username, String^ token) { // Constructor que permite inicializar el nombre de usuario y el token de verificación al crear un objeto Usuario. La contraseña se deja vacía inicialmente, ya que se establecerá durante el proceso de autenticación.
+	this->username = username;
 	this->verificationToken = token;
 }
 
-Usuario::Usuario(String^ username, String^ password) { // Constructor que permite inicializar el nombre de usuario y el token de verificación al crear un objeto Usuario. La contraseña se deja vacía inicialmente, ya que se establecerá durante el proceso de autenticación.
-	this->username = username;
-	this->password = password;
-}
+bool Usuario::autentificar(String^ password) {
 
-bool Usuario::autentificar() {
+	if (password == nullptr) return false;
+	if (this->username == nullptr) this->username = String::Empty;
+	if (this->verificationToken == nullptr) return false;
 
+	this->password = password; // Establecer la contraseña ingresada en el objeto Usuario para que pueda ser utilizada en la comparación con el token de verificación
 	if (this->verificationToken == Utils::GetMD5Hash(this->username + this->password)) { // Verificar si el token de verificación coincide con el hash MD5 del usuario concatenado con la contraseña ingresada
 		return true; // Autenticación exitosa
 	}
